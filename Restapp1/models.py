@@ -33,3 +33,6 @@ class Movie(models.Model):
 
 class Student(models.Model):
     pass
+
+class XiaoJun(models.Model):
+    pass
