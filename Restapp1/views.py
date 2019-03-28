@@ -52,33 +52,33 @@ class ActorListView(mixins.CreateModelMixin,GenericAPIView):
 #             })
 #         return JsonResponse(actor_list, safe=False)
 #
-#     def post(self, request):
-#         """
-#         新增演员信息
+#      def post(self, request):
+# #         """
+# #         新增演员信息
+# #
+# #         路由： POST /actors/
+#          """
+#          #获取用户要增加的请求数据 ---获取到是byte数据---》str--->dict
+# #         json_bytes = request.body
+#          #解码后为 str类型
+#          json_str = json_bytes.decode()
+#          #编码为json格式的字典
+#          actor_dict = json.loads(json_str)
 #
-#         路由： POST /actors/
-#         """
-#         #获取用户要增加的请求数据 ---获取到是byte数据---》str--->dict
-#         json_bytes = request.body
-#         #解码后为 str类型
-#         json_str = json_bytes.decode()
-#         #编码为json格式的字典
-#         actor_dict = json.loads(json_str)
+#          #吧获取到的数据写入数据库
+#          actor = Actor.objects.create(
+#              aname = actor_dict.get('aname'),
+#              age = actor_dict.get('age'),
+#              agender = actor_dict.get('agender'),
+#              birth_date = actor_dict.get('birth_date')
+#          )
+#          #返回给响应页面
+#          return JsonResponse({
+#                  'aid':actor.aid,
+#                  'aname':actor.aname,
+#                  'age':actor.age,
+#                  'agender':actor.agender,
+#                  'birth_date':actor.birth_date,
+#                  'photo':actor.photo.url if actor.photo else ''
 #
-#         #吧获取到的数据写入数据库
-#         actor = Actor.objects.create(
-#             aname = actor_dict.get('aname'),
-#             age = actor_dict.get('age'),
-#             agender = actor_dict.get('agender'),
-#             birth_date = actor_dict.get('birth_date')
-#         )
-#         #返回给响应页面
-#         return JsonResponse({
-#                 'aid':actor.aid,
-#                 'aname':actor.aname,
-#                 'age':actor.age,
-#                 'agender':actor.agender,
-#                 'birth_date':actor.birth_date,
-#                 'photo':actor.photo.url if actor.photo else ''
-#
-#             },status=201)
+#              },status=201)
